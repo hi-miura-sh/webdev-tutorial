@@ -1,124 +1,112 @@
 # Web開発基礎学習サイト
 
-このプロジェクトは、Apache2、HTML、CSS、JavaScriptの基礎を学ぶための学習サイトです。
+## はじめに
 
-## プロジェクト構成
+このサイトは、Web開発の基礎を学ぶための学習サイトです。
+「Webサイトってどうやって作るの？」という疑問から始まり、段階的に学習を進めていきます。
 
-```
-web-learning/
-├── README.md
-├── .htaccess
-├── index.html
-├── assets/
-│   ├── css/
-│   │   ├── style.css
-│   │   └── normalize.css
-│   ├── js/
-│   │   └── main.js
-│   └── images/
-├── pages/
-│   ├── apache/
-│   │   ├── index.html
-│   │   ├── basic.html
-│   │   └── configuration.html
-│   ├── html/
-│   │   ├── index.html
-│   │   ├── basic.html
-│   │   └── elements.html
-│   ├── css/
-│   │   ├── index.html
-│   │   ├── basic.html
-│   │   └── layout.html
-│   └── javascript/
-│       ├── index.html
-│       ├── basic.html
-│       └── dom.html
-└── examples/
-    ├── apache/
-    ├── html/
-    ├── css/
-    └── javascript/
-```
+## 学習の流れ
 
-## セットアップ手順
+### 1. Webサイトの仕組みを理解する
+- Webサイトはどのように表示されるの？
+- サーバーとクライアントの関係
+- URLの意味と構造
+- ブラウザの役割
 
-1. Apache2のインストール
-```bash
-sudo apt update
-sudo apt install apache2
-```
+### 2. 開発環境の準備
+- テキストエディタのインストール（Visual Studio Code）
+- ブラウザの開発者ツールの使い方
+- ファイルの保存と管理の基本
 
-2. プロジェクトの配置
-```bash
-sudo cp -r web-learning /var/www/html/
-sudo chown -R www-data:www-data /var/www/html/web-learning
-```
-
-3. Apache2の設定
-```bash
-sudo nano /etc/apache2/sites-available/000-default.conf
-```
-
-以下の設定を追加：
-```apache
-<Directory /var/www/html/web-learning>
-    Options Indexes FollowSymLinks
-    AllowOverride All
-    Require all granted
-</Directory>
-```
-
-4. Apache2の再起動
-```bash
-sudo systemctl restart apache2
-```
-
-## サイト構成
-
-### 1. Apache2セクション
-- Apache2の基本概念
-- インストール方法
-- 設定ファイルの説明
-- 基本的な設定方法
-- セキュリティ設定
-
-### 2. HTMLセクション
-- HTMLの基本構造
-- 主要なHTMLタグ
+### 3. HTMLの基礎（Webページの構造）
+- HTMLとは何か
+- 基本的なHTMLの書き方
+- よく使うHTMLタグ
+  - 見出し（h1, h2, h3...）
+  - 段落（p）
+  - リスト（ul, ol, li）
+  - リンク（a）
+  - 画像（img）
+- フォームの作り方
 - セマンティックHTML
-- フォーム要素
-- アクセシビリティ
 
-### 3. CSSセクション
-- CSSの基本構文
-- セレクタ
+### 4. CSSの基礎（デザインとレイアウト）
+- CSSとは何か
+- CSSの基本的な書き方
+- セレクタの種類と使い方
+- 色の指定方法
+- フォントの設定
 - ボックスモデル
-- レイアウト（Flexbox, Grid）
+- レイアウトの基本
+  - Flexbox
+  - Grid
 - レスポンシブデザイン
 
-### 4. JavaScriptセクション
-- JavaScriptの基本構文
+### 5. JavaScriptの基礎（動きと機能）
+- JavaScriptとは何か
+- JavaScriptの基本的な書き方
+- 変数とデータ型
+- 条件分岐（if文）
+- 繰り返し（for文）
+- 関数の作り方
 - DOM操作
 - イベント処理
-- 非同期処理
-- モダンJavaScript
+- 簡単なアニメーション
 
-## 開発ガイドライン
+### 6. Webサーバーの基礎（Apache2）
+- Webサーバーとは何か
+- Apache2のインストール
+- 基本的な設定
+- ファイルの配置
+- セキュリティの基本
 
-1. コードの品質
-- インデントは4スペース
-- セミコロンは必須
-- コメントは日本語で記述
+## 学習の進め方
 
-2. ファイル命名規則
-- すべて小文字
-- 単語間はハイフン（-）で区切る
-- 拡張子は小文字
+1. 各セクションの「基本」ページから始めましょう
+2. サンプルコードを実際に試してみましょう
+3. 練習問題に挑戦しましょう
+4. 分からないことは、エラーメッセージを確認しましょう
 
-3. ブランチ戦略
-- main: 本番環境用
-- develop: 開発用
-- feature/*: 機能開発用
+## 開発環境のセットアップ
+
+### 1. テキストエディタのインストール
+Visual Studio Codeをインストールします：
+1. [Visual Studio Codeの公式サイト](https://code.visualstudio.com/)にアクセス
+2. ダウンロードボタンをクリック
+3. インストーラーを実行
+
+### 2. ブラウザの開発者ツールの使い方
+1. ブラウザで右クリック → 「検証」を選択
+2. 開発者ツールが表示されます
+3. ElementsタブでHTMLの確認
+4. ConsoleタブでJavaScriptの実行
+5. Networkタブで通信の確認
+
+### 3. ローカル環境での実行方法
+1. ファイルを保存する
+2. ブラウザでファイルを開く
+3. 変更を確認する
+
+## よくある質問
+
+### Q: エラーが発生したらどうすればいいですか？
+A: エラーメッセージを確認し、以下の点を確認しましょう：
+- ファイル名は正しいですか？
+- コードの書き方は合っていますか？
+- 必要なファイルはすべてありますか？
+
+### Q: コードを書くときの注意点は？
+A: 以下の点に注意しましょう：
+- インデント（字下げ）を適切に行う
+- セミコロン（;）を忘れない
+- コメントを適切に書く
+- ファイル名は小文字で、スペースは使わない
+
+## 参考資料
+
+- [MDN Web Docs](https://developer.mozilla.org/ja/)
+- [W3Schools](https://www.w3schools.com/)
+- [HTML Living Standard](https://html.spec.whatwg.org/)
 
 ## ライセンス
 
