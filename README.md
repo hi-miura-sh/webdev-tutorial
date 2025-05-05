@@ -1,163 +1,244 @@
-# Web開発基礎学習サイト
+# Web開発入門チュートリアル
 
 ## はじめに
 
-このサイトは、Web開発の基礎を学ぶための学習サイトです。
-「Webサイトってどうやって作るの？」という疑問から始まり、段階的に学習を進めていきます。
+このチュートリアルでは、実際に手を動かしながらWeb開発の基礎を学んでいきます。
+「見る」だけでなく「作る」ことで、より深く理解することができます。
 
-## 学習の流れ
+## 準備
 
-### 1. Webサイトの仕組みを理解する
-- Webサイトはどのように表示されるの？
-- サーバーとクライアントの関係
-- URLの意味と構造
-- ブラウザの役割
+### 1. 開発環境の準備
 
-### 2. 開発環境の準備
-- テキストエディタのインストール（Visual Studio Code）
-- ブラウザの開発者ツールの使い方
-- ファイルの保存と管理の基本
+まず、WSLでApache2を起動します：
+```bash
+sudo service apache2 start
+```
 
-### 3. HTMLの基礎（Webページの構造）
-- HTMLとは何か
-- 基本的なHTMLの書き方
-- よく使うHTMLタグ
-  - 見出し（h1, h2, h3...）
-  - 段落（p）
-  - リスト（ul, ol, li）
-  - リンク（a）
-  - 画像（img）
-- フォームの作り方
-- セマンティックHTML
+### 2. 最初のWebページを作ろう
 
-### 4. CSSの基礎（デザインとレイアウト）
-- CSSとは何か
-- CSSの基本的な書き方
-- セレクタの種類と使い方
-- 色の指定方法
-- フォントの設定
-- ボックスモデル
-- レイアウトの基本
-  - Flexbox
-  - Grid
-- レスポンシブデザイン
+1. `/var/www/html` ディレクトリに移動します：
+```bash
+cd /var/www/html
+```
 
-### 5. JavaScriptの基礎（動きと機能）
-- JavaScriptとは何か
-- JavaScriptの基本的な書き方
-- 変数とデータ型
-- 条件分岐（if文）
-- 繰り返し（for文）
-- 関数の作り方
-- DOM操作
-- イベント処理
-- 簡単なアニメーション
+2. 以下の内容を `index.html` として保存します：
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Web開発入門</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>ようこそ Web開発入門サイトへ</h1>
+  <nav>
+    <ul>
+      <li><a href="html.html">HTML 入門</a></li>
+      <li><a href="css.html">CSS 入門</a></li>
+      <li><a href="js.html">JavaScript 入門</a></li>
+    </ul>
+  </nav>
+</body>
+</html>
+```
 
-### 6. Webサーバーの基礎（Apache2）
-- Webサーバーとは何か
-- Apache2のインストール
-- 基本的な設定
-- ファイルの配置
-- セキュリティの基本
+3. ブラウザで確認：
+- ブラウザを開いて `http://localhost` にアクセス
+- シンプルなWebページが表示されるはずです
 
-## 学習の進め方
+### 3. スタイルを追加しよう
 
-1. 各セクションの「基本」ページから始めましょう
-2. サンプルコードを実際に試してみましょう
-3. 練習問題に挑戦しましょう
-4. 分からないことは、エラーメッセージを確認しましょう
+1. 同じディレクトリに `style.css` を作成：
+```css
+body {
+  background: #fefefe;
+  font-family: sans-serif;
+  margin: 2em;
+}
 
-## 開発環境のセットアップ
+nav ul {
+  list-style: none;
+  padding: 0;
+}
 
-### 1. テキストエディタのインストール
-Visual Studio Codeをインストールします：
-1. [Visual Studio Codeの公式サイト](https://code.visualstudio.com/)にアクセス
-2. ダウンロードボタンをクリック
-3. インストーラーを実行
+nav li {
+  margin-bottom: 10px;
+}
 
-### 2. ブラウザの開発者ツールの使い方
-1. ブラウザで右クリック → 「検証」を選択
-2. 開発者ツールが表示されます
-3. ElementsタブでHTMLの確認
-4. ConsoleタブでJavaScriptの実行
-5. Networkタブで通信の確認
+a {
+  color: #007acc;
+  text-decoration: none;
+}
 
-### 3. ローカル環境での実行方法
-1. ファイルを保存する
-2. ブラウザでファイルを開く
-3. 変更を確認する
+a:hover {
+  text-decoration: underline;
+}
+```
 
-## よくある質問
+2. ブラウザを更新：
+- デザインが適用されていることを確認
 
-### Q: エラーが発生したらどうすればいいですか？
-A: エラーメッセージを確認し、以下の点を確認しましょう：
-- ファイル名は正しいですか？
-- コードの書き方は合っていますか？
-- 必要なファイルはすべてありますか？
+### 4. HTMLの基本を学ぼう
 
-### Q: コードを書くときの注意点は？
-A: 以下の点に注意しましょう：
-- インデント（字下げ）を適切に行う
-- セミコロン（;）を忘れない
-- コメントを適切に書く
-- ファイル名は小文字で、スペースは使わない
+1. `html.html` を作成：
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML 入門</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>HTMLとは？</h1>
+  <p>HTMLはウェブページの構造を定義するためのマークアップ言語です。</p>
+  
+  <h2>基本構造</h2>
+  <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;...&lt;/head&gt;
+  &lt;body&gt;...&lt;/body&gt;
+&lt;/html&gt;
+  </pre>
+
+  <h2>よく使うタグ</h2>
+  <ul>
+    <li>&lt;h1&gt; - 見出し</li>
+    <li>&lt;p&gt; - 段落</li>
+    <li>&lt;a&gt; - リンク</li>
+    <li>&lt;img&gt; - 画像</li>
+  </ul>
+
+  <h2>練習問題</h2>
+  <p>以下の要素を使って、自己紹介ページを作ってみましょう：</p>
+  <ul>
+    <li>見出し（h1, h2）</li>
+    <li>段落（p）</li>
+    <li>リスト（ul, li）</li>
+    <li>画像（img）</li>
+  </ul>
+
+  <a href="index.html">トップに戻る</a>
+</body>
+</html>
+```
+
+2. ブラウザで確認：
+- `http://localhost/html.html` にアクセス
+- HTMLの基本が学べるページが表示されます
+
+### 5. CSSの基本を学ぼう
+
+1. `css.html` を作成：
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>CSS 入門</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>CSSとは？</h1>
+  <p>CSSはウェブページのデザインを定義するためのスタイルシート言語です。</p>
+
+  <h2>基本的な書き方</h2>
+  <pre>
+セレクタ {
+  プロパティ: 値;
+}
+  </pre>
+
+  <h2>よく使うプロパティ</h2>
+  <ul>
+    <li>color - 文字色</li>
+    <li>background - 背景</li>
+    <li>margin - 外側の余白</li>
+    <li>padding - 内側の余白</li>
+  </ul>
+
+  <h2>練習問題</h2>
+  <p>以下のスタイルを適用してみましょう：</p>
+  <ul>
+    <li>見出しを青色に</li>
+    <li>段落に余白を追加</li>
+    <li>リストのマークを変更</li>
+  </ul>
+
+  <a href="index.html">トップに戻る</a>
+</body>
+</html>
+```
+
+### 6. JavaScriptの基本を学ぼう
+
+1. `js.html` を作成：
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript 入門</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>JavaScriptとは？</h1>
+  <p>JavaScriptはウェブページに動きを追加するためのプログラミング言語です。</p>
+
+  <h2>基本的な書き方</h2>
+  <pre>
+&lt;script&gt;
+  // ここにJavaScriptのコードを書きます
+&lt;/script&gt;
+  </pre>
+
+  <h2>簡単な例</h2>
+  <button onclick="alert('こんにちは！')">クリックしてください</button>
+
+  <h2>練習問題</h2>
+  <p>以下の機能を実装してみましょう：</p>
+  <ul>
+    <li>ボタンをクリックして文字を表示</li>
+    <li>時間を表示する</li>
+    <li>簡単な計算機を作る</li>
+  </ul>
+
+  <a href="index.html">トップに戻る</a>
+</body>
+</html>
+```
+
+## 確認方法
+
+1. すべてのファイルが正しく保存されているか確認：
+```bash
+ls -l /var/www/html/*.html
+ls -l /var/www/html/style.css
+```
+
+2. ブラウザで確認：
+- `http://localhost` - トップページ
+- `http://localhost/html.html` - HTML入門
+- `http://localhost/css.html` - CSS入門
+- `http://localhost/js.html` - JavaScript入門
+
+## 次のステップ
+
+1. 各ページの内容をカスタマイズしてみましょう
+2. 新しいページを追加してみましょう
+3. スタイルを変更してみましょう
+4. インタラクティブな要素を追加してみましょう
+
+## 困ったときは
+
+- ファイルが表示されない → ファイル名とパスを確認
+- スタイルが適用されない → CSSファイルのパスを確認
+- エラーが発生する → ブラウザの開発者ツールで確認
 
 ## 参考資料
 
 - [MDN Web Docs](https://developer.mozilla.org/ja/)
 - [W3Schools](https://www.w3schools.com/)
-- [HTML Living Standard](https://html.spec.whatwg.org/)
-
-## ライセンス
-
-MIT License 
-
-## web-learningディレクトリのindex.htmlを公開する方法
-
-みなさん、/var/www/html/index.html（デフォルトのトップページ）を公開する方法はご存じですね。
-
-今回は、自分で作成した「web-learning」ディレクトリ内のindex.htmlをWebブラウザから見られるようにする方法を説明します。
-
-### 1. ディレクトリの配置
-
-まず、web-learningディレクトリが/var/www/html/の中にあることを確認しましょう。
-
-```
-/var/www/html/web-learning/index.html
-```
-
-### 2. アクセス方法
-
-Webブラウザで、以下のURLにアクセスします。
-
-```
-http://<サーバーのIPアドレスまたはドメイン>/web-learning/
-```
-
-例：
-```
-http://localhost/web-learning/
-```
-
-このURLにアクセスすると、web-learningディレクトリ内のindex.htmlが表示されます。
-
-### 3. よくある間違い
-
-- URLの最後に「/」を忘れると、index.htmlが表示されない場合があります。
-- ディレクトリやファイルのパーミッション（権限）が正しく設定されていないと、ページが表示されません。
-    - 必要に応じて、以下のコマンドで権限を確認・修正しましょう。
-    ```bash
-    sudo chown -R www-data:www-data /var/www/html/web-learning
-    sudo chmod -R 755 /var/www/html/web-learning
-    ```
-- Apacheの設定で「Indexes」や「AllowOverride」などが有効になっているか確認しましょう。
-
-### 4. まとめ
-
-- /var/www/html/web-learning/ にindex.htmlを置く
-- ブラウザで http://<サーバーアドレス>/web-learning/ にアクセス
-- 権限や設定に注意
-
-困ったときは、エラーメッセージやApacheのエラーログ（/var/log/apache2/error.log）を確認しましょう。
-
---- 
+- [HTML Living Standard](https://html.spec.whatwg.org/) 
