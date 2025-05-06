@@ -26,7 +26,10 @@ sudo service apache2 start
 ```bash
 ip addr show
 ```
+
 このコマンドを実行すると、以下のような情報が表示されます：
+
+有線LAN接続の場合：
 ```
 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
     link/ether 00:15:5d:01:ca:05 brd ff:ff:ff:ff:ff:ff
@@ -35,13 +38,34 @@ ip addr show
     inet6 fe80::215:5dff:fe01:ca05/64 scope link
        valid_lft forever preferred_lft 86397sec
 ```
-この例では、`192.168.1.100`がプライベートIPアドレスです。
+
+無線LAN（Wi-Fi）接続の場合：
+```
+3: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:15:5d:01:ca:06 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.101/24 brd 192.168.1.255 scope global dynamic wlan0
+       valid_lft 86397sec preferred_lft 86397sec
+    inet6 fe80::215:5dff:fe01:ca06/64 scope link
+       valid_lft forever preferred_lft 86397sec
+```
+
+IPアドレスの見分け方：
+- 有線LAN接続：`eth0`インターフェースの`inet`の後に表示されるIPアドレス（例：`192.168.1.100`）
+- 無線LAN接続：`wlan0`インターフェースの`inet`の後に表示されるIPアドレス（例：`192.168.1.101`）
 
 4. インストールと起動が成功したか確認するには、ブラウザで以下のURLにアクセスしてみましょう：
 - 同じPCから：`http://localhost` または `http://127.0.0.1`
-- 同じネットワーク内の他のデバイスから：`http://192.168.1.100`（あなたのプライベートIPアドレス）
+- 同じネットワーク内の他のデバイスから：
+  - 有線LAN接続の場合：`http://192.168.1.100`（あなたの有線LANのIPアドレス）
+  - 無線LAN接続の場合：`http://192.168.1.101`（あなたの無線LANのIPアドレス）
 
 「Apache2 Ubuntu Default Page」というページが表示されれば成功です。
+
+注意点：
+- IPアドレスは環境によって異なる場合があります
+- 有線LANと無線LANを同時に使用している場合、両方のIPアドレスが表示されます
+- プライベートIPアドレスは通常`192.168.`または`10.`で始まります
+- インターフェース名（`eth0`や`wlan0`）は環境によって異なる場合があります
 
 ### 2. 自己紹介サイトの基本構造を作ろう
 
