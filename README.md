@@ -219,7 +219,13 @@ footer {
 
 ### 4. インタラクティブな機能を追加しよう
 
-1. `script.js` を作成：
+JavaScriptは、Webページに動きや機能を追加するためのプログラミング言語です。
+ここでは、2つの基本的な機能を実装します：
+
+1. お問い合わせフォームの送信処理
+2. スムーズスクロール機能
+
+まず、`script.js` を作成します：
 ```javascript
 // フォーム送信時の処理
 document.getElementById('contact-form').addEventListener('submit', function(e) {
@@ -246,6 +252,67 @@ document.querySelectorAll('nav a').forEach(anchor => {
   });
 });
 ```
+
+このJavaScriptコードの説明：
+
+#### 1. フォーム送信の処理
+```javascript
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  // ...
+});
+```
+- `document.getElementById('contact-form')` - HTMLの`id="contact-form"`を持つ要素（フォーム）を取得
+- `addEventListener('submit', ...)` - フォームが送信されたときの処理を設定
+- `e.preventDefault()` - フォームの通常の送信動作をキャンセル（ページのリロードを防ぐ）
+
+```javascript
+const name = document.getElementById('name').value;
+const email = document.getElementById('email').value;
+const message = document.getElementById('message').value;
+```
+- フォームの各入力欄（名前、メール、メッセージ）の値を取得
+- `value`プロパティで入力されたテキストを取得
+
+```javascript
+alert(`送信完了！\n\n名前: ${name}\nメール: ${email}\nメッセージ: ${message}`);
+```
+- 送信された内容をポップアップで表示
+- `\n`は改行を表す
+- `${...}`で変数の値を文字列に埋め込む
+
+```javascript
+this.reset();
+```
+- フォームの内容をクリア（リセット）
+
+#### 2. スムーズスクロール機能
+```javascript
+document.querySelectorAll('nav a').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const section = document.querySelector(this.getAttribute('href'));
+    section.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+```
+- `document.querySelectorAll('nav a')` - ナビゲーションメニューのすべてのリンクを取得
+- `forEach` - 各リンクに対して処理を実行
+- `addEventListener('click', ...)` - リンクがクリックされたときの処理を設定
+- `e.preventDefault()` - リンクの通常の動作（ページジャンプ）をキャンセル
+- `this.getAttribute('href')` - クリックされたリンクの`href`属性の値を取得（例：`#about`）
+- `document.querySelector(...)` - 指定されたIDのセクションを取得
+- `scrollIntoView({ behavior: 'smooth' })` - そのセクションまでスムーズにスクロール
+
+#### 動作確認方法
+1. お問い合わせフォーム
+   - 名前、メール、メッセージを入力
+   - 「送信」ボタンをクリック
+   - 入力内容がポップアップで表示され、フォームがクリアされることを確認
+
+2. スムーズスクロール
+   - ナビゲーションメニューのリンクをクリック
+   - 対応するセクションまでスムーズにスクロールすることを確認
 
 ## カスタマイズのポイント
 
