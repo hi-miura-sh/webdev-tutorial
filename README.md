@@ -7,15 +7,16 @@
    - [自己紹介サイトの基本構造を作ろう](#2-自己紹介サイトの基本構造を作ろう)
 3. [スタイルの追加](#3-スタイルを追加しよう)
 4. [インタラクティブな機能](#4-インタラクティブな機能を追加しよう)
-5. [カスタマイズのポイント](#カスタマイズのポイント)
-6. [確認方法](#確認方法)
-7. [Node.js開発環境](#7-nodejsで開発環境を整えようオプション)
-8. [困ったときは](#困ったときは)
-9. [セキュリティ](#セキュリティに関する重要な注意点)
+5. [Bootstrapでデザインを簡単に整えよう](#5-bootstrapでデザインを簡単に整えよう)
+6. [カスタマイズのポイント](#カスタマイズのポイント)
+7. [確認方法](#確認方法)
+8. [Node.js開発環境](#7-nodejsで開発環境を整えようオプション)
+9. [困ったときは](#困ったときは)
+10. [セキュリティ](#セキュリティに関する重要な注意点)
    - [セキュリティの基本用語](#セキュリティの基本用語)
    - [セキュリティの重要性](#なぜセキュリティが重要なのか)
    - [リスクと対策](#具体的なリスクと対策)
-10. [参考資料](#参考資料)
+11. [参考資料](#参考資料)
 
 [目次に戻る](#目次)
 
@@ -425,6 +426,322 @@ document.querySelectorAll('nav a').forEach(anchor => {
 2. スムーズスクロール
    - ナビゲーションメニューのリンクをクリック
    - 対応するセクションまでスムーズにスクロールすることを確認
+
+[目次に戻る](#目次)
+
+## 5. Bootstrapでデザインを簡単に整えよう
+
+### Bootstrapとは？
+Bootstrapは、Webサイトのデザインを簡単に整えることができる人気のフレームワークです。
+「フレームワーク」とは、開発を効率化するための便利な機能や部品がまとまったもののことです。
+
+#### なぜBootstrapを使うの？
+1. 時間の節約
+   - デザインの基本部分を一から作る必要がない
+   - 既存の部品を組み合わせるだけで見栄えの良いサイトが作れる
+   - レスポンシブデザイン（スマートフォン対応）が簡単に実現できる
+
+2. 品質の向上
+   - プロが作ったデザインを利用できる
+   - ブラウザの違いによる表示の違いを気にしなくて良い
+   - 最新のWebデザインのトレンドに合わせた部品が用意されている
+
+3. 学習のしやすさ
+   - 多くのWebサイトで使われている
+   - 日本語の情報が豊富
+   - 基本的な使い方がシンプル
+
+### 1. Bootstrapの導入
+
+#### CDNを使った導入方法
+CDN（Content Delivery Network）とは、インターネット上でファイルを配信する仕組みです。
+Bootstrapのファイルを自分のサーバーに置かなくても、インターネットから読み込むことができます。
+
+1. `index.html`の`<head>`タグ内に以下のコードを追加：
+```html
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+```
+このコードは、Bootstrapのスタイル（デザイン）を読み込むためのものです。
+
+2. `</body>`タグの直前に以下のコードを追加：
+```html
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+```
+このコードは、Bootstrapの動的な機能（ドロップダウンメニューなど）を動かすためのものです。
+
+### 2. 基本的な使い方
+
+#### グリッドシステム
+Bootstrapのグリッドシステムは、画面を12個のカラム（列）に分けて、要素を配置する仕組みです。
+これにより、画面の大きさに応じて要素の配置を自動的に調整できます。
+
+```html
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">左側のコンテンツ</div>
+    <div class="col-md-4">中央のコンテンツ</div>
+    <div class="col-md-4">右側のコンテンツ</div>
+  </div>
+</div>
+```
+
+クラスの意味：
+- `container`: コンテンツを中央寄せにし、左右に余白を作る
+- `row`: 横並びの行を作成する
+- `col-md-4`: 
+  - `md`: 中サイズの画面（768px以上）で
+  - `4`: 12カラムのうち4カラム分の幅を取る
+
+画面サイズの種類：
+- `sm`: 小さい画面（576px以上）
+- `md`: 中くらいの画面（768px以上）
+- `lg`: 大きい画面（992px以上）
+- `xl`: より大きい画面（1200px以上）
+
+#### よく使うクラス
+
+1. ボタン：
+```html
+<button class="btn btn-primary">プライマリーボタン</button>
+<button class="btn btn-secondary">セカンダリーボタン</button>
+<button class="btn btn-success">成功ボタン</button>
+<button class="btn btn-danger">危険ボタン</button>
+```
+
+ボタンの種類：
+- `btn-primary`: 主要な操作用（青）
+- `btn-secondary`: 補助的な操作用（グレー）
+- `btn-success`: 成功を示す操作用（緑）
+- `btn-danger`: 危険な操作用（赤）
+
+2. カード：
+カードは、情報を整理して表示するためのコンポーネントです。
+画像、タイトル、説明文などをまとめて表示できます。
+
+```html
+<div class="card">
+  <img src="profile.jpg" class="card-img-top" alt="プロフィール画像">
+  <div class="card-body">
+    <h5 class="card-title">カードのタイトル</h5>
+    <p class="card-text">カードの内容をここに書きます。</p>
+    <a href="#" class="btn btn-primary">詳細を見る</a>
+  </div>
+</div>
+```
+
+カードの主なクラス：
+- `card`: カード全体を定義
+- `card-img-top`: カードの上部に画像を配置
+- `card-body`: カードの内容部分
+- `card-title`: カードのタイトル
+- `card-text`: カードの本文
+
+3. ナビゲーションバー：
+ナビゲーションバーは、サイト内の主要なリンクを表示するためのコンポーネントです。
+スマートフォンでは自動的にハンバーガーメニューに変わります。
+
+```html
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">サイト名</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#about">About Me</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#hobby">趣味</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#skills">スキル</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+```
+
+ナビゲーションバーの主なクラス：
+- `navbar`: ナビゲーションバー全体
+- `navbar-expand-lg`: 大きい画面でメニューを展開
+- `navbar-dark`: 暗い背景用のスタイル
+- `bg-dark`: 暗い背景色
+- `navbar-brand`: サイト名やロゴ
+- `navbar-toggler`: ハンバーガーメニューボタン
+- `navbar-nav`: メニュー項目のリスト
+- `nav-item`: 個々のメニュー項目
+- `nav-link`: メニューのリンク
+
+### 3. カスタマイズ例
+
+#### プロフィールセクションの改善
+このセクションでは、Bootstrapのグリッドシステムとユーティリティクラスを使って、
+プロフィール情報を見やすく整理します。
+
+```html
+<section id="about" class="py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-4">
+        <img src="profile.jpg" class="img-fluid rounded-circle" alt="プロフィール画像">
+      </div>
+      <div class="col-md-8">
+        <h2 class="mb-4">About Me</h2>
+        <p class="lead">はじめまして！私は[あなたの名前]です。</p>
+        <p>[簡単な自己紹介文をここに書きます]</p>
+        <div class="mt-4">
+          <a href="#" class="btn btn-primary me-2">ポートフォリオを見る</a>
+          <a href="#" class="btn btn-outline-secondary">お問い合わせ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+使用しているクラスの説明：
+- `py-5`: 上下の余白を大きく設定
+- `align-items-center`: 縦方向の中央揃え
+- `img-fluid`: 画像を親要素に合わせてリサイズ
+- `rounded-circle`: 画像を円形に
+- `lead`: 本文より大きい文字サイズ
+- `me-2`: 右側の余白を設定
+- `btn-outline-secondary`: 枠線のみのボタン
+
+#### スキルセクションの改善
+スキルをカード形式で表示し、進捗バーで視覚的に表現します。
+
+```html
+<section id="skills" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-5">スキル</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">HTML/CSS</h5>
+            <div class="progress mb-3">
+              <div class="progress-bar" role="progressbar" style="width: 90%">90%</div>
+            </div>
+            <p class="card-text">レスポンシブデザインの実装が得意です。</p>
+          </div>
+        </div>
+      </div>
+      <!-- 他のスキルカードも同様に -->
+    </div>
+  </div>
+</section>
+```
+
+使用しているクラスの説明：
+- `bg-light`: 薄いグレーの背景色
+- `text-center`: テキストを中央揃え
+- `mb-5`: 下の余白を大きく設定
+- `h-100`: カードの高さを揃える
+- `progress`: 進捗バーのコンテナ
+- `progress-bar`: 進捗バー自体
+
+#### お問い合わせフォームの改善
+Bootstrapのフォームコンポーネントを使って、使いやすい入力フォームを作成します。
+
+```html
+<section id="contact" class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-5">お問い合わせ</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <form id="contact-form" class="needs-validation" novalidate>
+          <div class="mb-3">
+            <label for="name" class="form-label">お名前</label>
+            <input type="text" class="form-control" id="name" required>
+            <div class="invalid-feedback">
+              お名前を入力してください。
+            </div>
+          </div>
+          <!-- 他のフォーム要素も同様に -->
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+使用しているクラスの説明：
+- `justify-content-center`: 横方向の中央揃え
+- `needs-validation`: フォームのバリデーション用
+- `form-label`: フォームのラベル
+- `form-control`: フォームの入力欄
+- `invalid-feedback`: エラーメッセージ
+
+### 4. カスタマイズのポイント
+
+#### 1. 色の変更
+Bootstrapのデフォルトの色を変更して、サイトの雰囲気を変えることができます。
+
+```html
+<!-- カスタムCSSを追加 -->
+<style>
+  :root {
+    --bs-primary: #2c3e50;    /* メインカラー */
+    --bs-secondary: #3498db;  /* アクセントカラー */
+  }
+</style>
+```
+
+#### 2. フォントの変更
+Google Fontsを使って、日本語フォントを追加します。
+
+```html
+<!-- Google Fontsを追加 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+</style>
+```
+
+#### 3. アニメーションの追加
+AOS（Animate On Scroll）ライブラリを使って、スクロール時のアニメーションを追加します。
+
+```html
+<!-- AOSライブラリを追加 -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+  AOS.init();
+</script>
+
+<!-- アニメーションの適用 -->
+<div data-aos="fade-up">
+  フェードインしながら上から表示される要素
+</div>
+```
+
+### 5. レスポンシブデザインの確認
+
+レスポンシブデザインとは、画面の大きさに応じてレイアウトが自動的に変化するデザインのことです。
+Bootstrapを使うと、このレスポンシブデザインが簡単に実現できます。
+
+確認手順：
+1. ブラウザの開発者ツールを開く（F12キー）
+2. デバイスモードを選択（スマートフォンやタブレットのアイコン）
+3. スマートフォンやタブレットの表示を確認
+4. レイアウトが崩れていないか確認
+5. 必要に応じて調整
+
+よくある調整ポイント：
+- 画像のサイズ
+- フォントサイズ
+- 余白の大きさ
+- メニューの表示方法
 
 [目次に戻る](#目次)
 
