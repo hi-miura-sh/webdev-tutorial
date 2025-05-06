@@ -1,9 +1,30 @@
 # 自己紹介サイト作成チュートリアル
 
+## 目次
+1. [はじめに](#はじめに)
+2. [準備](#準備)
+   - [開発環境の準備](#1-開発環境の準備)
+   - [自己紹介サイトの基本構造を作ろう](#2-自己紹介サイトの基本構造を作ろう)
+3. [スタイルの追加](#3-スタイルを追加しよう)
+4. [インタラクティブな機能](#4-インタラクティブな機能を追加しよう)
+5. [カスタマイズのポイント](#カスタマイズのポイント)
+6. [確認方法](#確認方法)
+7. [セキュリティ](#セキュリティに関する重要な注意点)
+   - [セキュリティの基本用語](#セキュリティの基本用語)
+   - [セキュリティの重要性](#なぜセキュリティが重要なのか)
+   - [リスクと対策](#具体的なリスクと対策)
+8. [Node.js開発環境](#7-nodejsで開発環境を整えようオプション)
+9. [困ったときは](#困ったときは)
+10. [参考資料](#参考資料)
+
+[目次に戻る](#目次)
+
 ## はじめに
 
 このチュートリアルでは、HTML、CSS、JavaScriptを使って、あなただけの自己紹介サイトを作成します。
 実際に手を動かしながら、Web開発の基礎を学んでいきましょう。
+
+[目次に戻る](#目次)
 
 ## 準備
 
@@ -66,6 +87,8 @@ IPアドレスの見分け方：
 - 有線LANと無線LANを同時に使用している場合、両方のIPアドレスが表示されます
 - プライベートIPアドレスは通常`192.168.`または`10.`で始まります
 - インターフェース名（`eth0`や`wlan0`）は環境によって異なる場合があります
+
+[目次に戻る](#目次)
 
 ### 2. 自己紹介サイトの基本構造を作ろう
 
@@ -154,6 +177,8 @@ cd /var/www/html
 このHTMLファイルをブラウザで開くと、非常にシンプルな見た目になります。
 テキストは左揃えで、余白も適切に設定されておらず、見た目が整っていません。
 これをCSSで整えていきましょう。
+
+[目次に戻る](#目次)
 
 ### 3. スタイルを追加しよう
 
@@ -274,6 +299,8 @@ CSSの基本的な書き方：
 - `text-align` - テキストの配置
 - `display` - 要素の表示方法
 
+[目次に戻る](#目次)
+
 ### 4. インタラクティブな機能を追加しよう
 
 JavaScriptは、Webページに動きや機能を追加するためのプログラミング言語です。
@@ -389,6 +416,8 @@ document.querySelectorAll('nav a').forEach(anchor => {
    - ナビゲーションメニューのリンクをクリック
    - 対応するセクションまでスムーズにスクロールすることを確認
 
+[目次に戻る](#目次)
+
 ## カスタマイズのポイント
 
 1. プロフィール情報の更新
@@ -433,6 +462,8 @@ document.querySelectorAll('nav a').forEach(anchor => {
    - プロフェッショナルな印象を与える
    - 技術力のアピール
 
+[目次に戻る](#目次)
+
 ## 確認方法
 
 1. すべてのファイルが正しく保存されているか確認：
@@ -451,218 +482,7 @@ ls -l /var/www/html/script.js
 - 各セクションへのリンクが機能することを確認
 - フォームが動作することを確認
 
-## 困ったときは
-
-- ファイルが表示されない → ファイル名とパスを確認
-- スタイルが適用されない → CSSファイルのパスを確認
-- 画像が表示されない → 画像ファイルのパスと名前を確認
-- スクリプトが動作しない → ブラウザの開発者ツールでエラーを確認
-- 他のデバイスからアクセスできない場合：
-  - ファイアウォールの設定を確認
-  - Apache2の設定で外部からのアクセスを許可
-  ```bash
-  sudo ufw allow 80/tcp
-  ```
-  - Apache2の設定ファイルを編集
-  ```bash
-  sudo nano /etc/apache2/apache2.conf
-  ```
-  以下の行を探して、必要に応じて修正：
-  ```
-  <Directory /var/www/html>
-      Options Indexes FollowSymLinks
-      AllowOverride All
-      Require all granted
-  </Directory>
-  ```
-  変更後、Apache2を再起動：
-  ```bash
-  sudo service apache2 restart
-  ```
-
-## 参考資料
-
-- [MDN Web Docs](https://developer.mozilla.org/ja/)
-- [W3Schools](https://www.w3schools.com/)
-- [HTML Living Standard](https://html.spec.whatwg.org/)
-- [Node.js公式サイト](https://nodejs.org/)
-- [npm公式サイト](https://www.npmjs.com/)
-
-### 7. Node.jsで開発環境を整えよう（オプション）
-
-Node.jsは、JavaScriptをサーバーサイドで実行できるようにする環境です。
-モダンなWeb開発では、Node.jsを使用して開発環境を整えることが一般的です。
-
-#### 1. Node.jsのインストールと確認
-
-1. Node.jsのインストール：
-```bash
-# Node.jsのバージョン管理ツール（nvm）をインストール
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-
-# シェルを再起動するか、以下のコマンドを実行
-source ~/.bashrc
-
-# 最新のLTS版Node.jsをインストール
-nvm install --lts
-```
-
-2. インストールの確認：
-```bash
-# Node.jsのバージョンを確認
-node -v
-
-# npmのバージョンを確認
-npm -v
-```
-
-#### 2. プロジェクトの作成と設定
-
-1. プロジェクトディレクトリの作成：
-```bash
-# プロジェクトディレクトリを作成
-mkdir my-profile-site
-cd my-profile-site
-
-# 既存のファイルをコピー
-cp /var/www/html/*.{html,css,js} .
-```
-
-2. プロジェクトの初期化：
-```bash
-# package.jsonの作成
-npm init -y
-
-# 開発用サーバーのインストール
-npm install --save-dev live-server
-```
-
-3. `package.json`の編集：
-```bash
-# package.jsonを開く
-nano package.json
-```
-
-以下のように`scripts`セクションを編集：
-```json
-{
-  "name": "my-profile-site",
-  "version": "1.0.0",
-  "description": "My personal profile site",
-  "main": "index.html",
-  "scripts": {
-    "start": "live-server --port=8080",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "live-server": "^1.2.2"
-  }
-}
-```
-
-#### 3. 開発サーバーの起動と確認
-
-1. 開発サーバーの起動：
-```bash
-npm start
-```
-
-2. ブラウザで確認：
-- `http://localhost:8080` にアクセス
-- サイトが表示されることを確認
-- ファイルを編集して保存すると、自動的にブラウザが更新されることを確認
-
-#### 4. 便利な機能の追加
-
-1. 画像の最適化ツールのインストール：
-```bash
-npm install --save-dev sharp
-```
-
-2. 画像最適化スクリプトの作成：
-```bash
-# scriptsディレクトリを作成
-mkdir scripts
-
-# 画像最適化スクリプトを作成
-nano scripts/optimize-images.js
-```
-
-以下の内容を追加：
-```javascript
-const sharp = require('sharp');
-const fs = require('fs');
-const path = require('path');
-
-// 画像を最適化する関数
-async function optimizeImage(inputPath, outputPath) {
-  try {
-    await sharp(inputPath)
-      .resize(800) // 最大幅を800pxに
-      .jpeg({ quality: 80 }) // JPEG品質を80%に
-      .toFile(outputPath);
-    console.log(`最適化完了: ${outputPath}`);
-  } catch (error) {
-    console.error(`エラー: ${error.message}`);
-  }
-}
-
-// プロフィール画像を最適化
-optimizeImage('profile.jpg', 'profile-optimized.jpg');
-```
-
-3. スクリプトの実行：
-```bash
-node scripts/optimize-images.js
-```
-
-#### 5. 開発の効率化
-
-1. ファイル監視の自動化：
-```bash
-npm install --save-dev nodemon
-```
-
-2. `package.json`の`scripts`セクションに追加：
-```json
-{
-  "scripts": {
-    "start": "live-server --port=8080",
-    "optimize": "node scripts/optimize-images.js",
-    "watch": "nodemon scripts/optimize-images.js"
-  }
-}
-```
-
-3. 使用例：
-```bash
-# 開発サーバーの起動
-npm start
-
-# 画像の最適化
-npm run optimize
-
-# 画像の自動最適化（ファイル変更を監視）
-npm run watch
-```
-
-これにより、以下の機能が使えるようになります：
-- ファイルの変更を自動検知してブラウザを更新
-- ローカル開発サーバー（http://localhost:8080）
-- モジュールの管理（npm）
-- 画像の自動最適化
-- 開発効率の向上
-
-## 参考資料
-
-- [MDN Web Docs](https://developer.mozilla.org/ja/)
-- [W3Schools](https://www.w3schools.com/)
-- [HTML Living Standard](https://html.spec.whatwg.org/)
-- [Node.js公式サイト](https://nodejs.org/)
-- [npm公式サイト](https://www.npmjs.com/)
+[目次に戻る](#目次)
 
 ## セキュリティに関する重要な注意点
 
@@ -858,4 +678,217 @@ Options -Indexes
 - [ ] 定期的な更新の実施
 - [ ] バックアップの作成
 - [ ] エラーメッセージの制御
-- [ ] 開発環境と本番環境の分離 
+- [ ] 開発環境と本番環境の分離
+
+[目次に戻る](#目次)
+
+## 7. Node.jsで開発環境を整えよう（オプション）
+
+Node.jsは、JavaScriptをサーバーサイドで実行できるようにする環境です。
+モダンなWeb開発では、Node.jsを使用して開発環境を整えることが一般的です。
+
+#### 1. Node.jsのインストールと確認
+
+1. Node.jsのインストール：
+```bash
+# Node.jsのバージョン管理ツール（nvm）をインストール
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# シェルを再起動するか、以下のコマンドを実行
+source ~/.bashrc
+
+# 最新のLTS版Node.jsをインストール
+nvm install --lts
+```
+
+2. インストールの確認：
+```bash
+# Node.jsのバージョンを確認
+node -v
+
+# npmのバージョンを確認
+npm -v
+```
+
+#### 2. プロジェクトの作成と設定
+
+1. プロジェクトディレクトリの作成：
+```bash
+# プロジェクトディレクトリを作成
+mkdir my-profile-site
+cd my-profile-site
+
+# 既存のファイルをコピー
+cp /var/www/html/*.{html,css,js} .
+```
+
+2. プロジェクトの初期化：
+```bash
+# package.jsonの作成
+npm init -y
+
+# 開発用サーバーのインストール
+npm install --save-dev live-server
+```
+
+3. `package.json`の編集：
+```bash
+# package.jsonを開く
+nano package.json
+```
+
+以下のように`scripts`セクションを編集：
+```json
+{
+  "name": "my-profile-site",
+  "version": "1.0.0",
+  "description": "My personal profile site",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=8080",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
+```
+
+#### 3. 開発サーバーの起動と確認
+
+1. 開発サーバーの起動：
+```bash
+npm start
+```
+
+2. ブラウザで確認：
+- `http://localhost:8080` にアクセス
+- サイトが表示されることを確認
+- ファイルを編集して保存すると、自動的にブラウザが更新されることを確認
+
+#### 4. 便利な機能の追加
+
+1. 画像の最適化ツールのインストール：
+```bash
+npm install --save-dev sharp
+```
+
+2. 画像最適化スクリプトの作成：
+```bash
+# scriptsディレクトリを作成
+mkdir scripts
+
+# 画像最適化スクリプトを作成
+nano scripts/optimize-images.js
+```
+
+以下の内容を追加：
+```javascript
+const sharp = require('sharp');
+const fs = require('fs');
+const path = require('path');
+
+// 画像を最適化する関数
+async function optimizeImage(inputPath, outputPath) {
+  try {
+    await sharp(inputPath)
+      .resize(800) // 最大幅を800pxに
+      .jpeg({ quality: 80 }) // JPEG品質を80%に
+      .toFile(outputPath);
+    console.log(`最適化完了: ${outputPath}`);
+  } catch (error) {
+    console.error(`エラー: ${error.message}`);
+  }
+}
+
+// プロフィール画像を最適化
+optimizeImage('profile.jpg', 'profile-optimized.jpg');
+```
+
+3. スクリプトの実行：
+```bash
+node scripts/optimize-images.js
+```
+
+#### 5. 開発の効率化
+
+1. ファイル監視の自動化：
+```bash
+npm install --save-dev nodemon
+```
+
+2. `package.json`の`scripts`セクションに追加：
+```json
+{
+  "scripts": {
+    "start": "live-server --port=8080",
+    "optimize": "node scripts/optimize-images.js",
+    "watch": "nodemon scripts/optimize-images.js"
+  }
+}
+```
+
+3. 使用例：
+```bash
+# 開発サーバーの起動
+npm start
+
+# 画像の最適化
+npm run optimize
+
+# 画像の自動最適化（ファイル変更を監視）
+npm run watch
+```
+
+これにより、以下の機能が使えるようになります：
+- ファイルの変更を自動検知してブラウザを更新
+- ローカル開発サーバー（http://localhost:8080）
+- モジュールの管理（npm）
+- 画像の自動最適化
+- 開発効率の向上
+
+[目次に戻る](#目次)
+
+## 困ったときは
+
+- ファイルが表示されない → ファイル名とパスを確認
+- スタイルが適用されない → CSSファイルのパスを確認
+- 画像が表示されない → 画像ファイルのパスと名前を確認
+- スクリプトが動作しない → ブラウザの開発者ツールでエラーを確認
+- 他のデバイスからアクセスできない場合：
+  - ファイアウォールの設定を確認
+  - Apache2の設定で外部からのアクセスを許可
+  ```bash
+  sudo ufw allow 80/tcp
+  ```
+  - Apache2の設定ファイルを編集
+  ```bash
+  sudo nano /etc/apache2/apache2.conf
+  ```
+  以下の行を探して、必要に応じて修正：
+  ```
+  <Directory /var/www/html>
+      Options Indexes FollowSymLinks
+      AllowOverride All
+      Require all granted
+  </Directory>
+  ```
+  変更後、Apache2を再起動：
+  ```bash
+  sudo service apache2 restart
+  ```
+
+[目次に戻る](#目次)
+
+## 参考資料
+
+- [MDN Web Docs](https://developer.mozilla.org/ja/)
+- [W3Schools](https://www.w3schools.com/)
+- [HTML Living Standard](https://html.spec.whatwg.org/)
+- [Node.js公式サイト](https://nodejs.org/)
+- [npm公式サイト](https://www.npmjs.com/)
+
+[目次に戻る](#目次) 
