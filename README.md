@@ -1,9 +1,9 @@
-# Web開発入門チュートリアル
+# 自己紹介サイト作成チュートリアル
 
 ## はじめに
 
-このチュートリアルでは、実際に手を動かしながらWeb開発の基礎を学んでいきます。
-「見る」だけでなく「作る」ことで、より深く理解することができます。
+このチュートリアルでは、HTML、CSS、JavaScriptを使って、あなただけの自己紹介サイトを作成します。
+実際に手を動かしながら、Web開発の基礎を学んでいきましょう。
 
 ## 準備
 
@@ -25,7 +25,7 @@ sudo service apache2 start
 3. インストールと起動が成功したか確認するには、ブラウザで `http://localhost` にアクセスしてみましょう。
 「Apache2 Ubuntu Default Page」というページが表示されれば成功です。
 
-### 2. 最初のWebページを作ろう
+### 2. 自己紹介サイトの基本構造を作ろう
 
 1. `/var/www/html` ディレクトリに移動します：
 ```bash
@@ -38,206 +38,231 @@ cd /var/www/html
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Web開発入門</title>
+  <title>私の自己紹介</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>ようこそ Web開発入門サイトへ</h1>
-  <nav>
-    <ul>
-      <li><a href="html.html">HTML 入門</a></li>
-      <li><a href="css.html">CSS 入門</a></li>
-      <li><a href="js.html">JavaScript 入門</a></li>
-    </ul>
-  </nav>
-</body>
-</html>
-```
+  <header>
+    <h1>私の自己紹介</h1>
+    <nav>
+      <ul>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#hobby">趣味</a></li>
+        <li><a href="#skills">スキル</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </header>
 
-3. ブラウザで確認：
-- ブラウザを開いて `http://localhost` にアクセス
-- シンプルなWebページが表示されるはずです
+  <main>
+    <section id="about">
+      <h2>About Me</h2>
+      <img src="profile.jpg" alt="プロフィール画像" class="profile-image">
+      <p>はじめまして！私は[あなたの名前]です。</p>
+      <p>[簡単な自己紹介文をここに書きます]</p>
+    </section>
 
-### 3. スタイルを追加しよう
+    <section id="hobby">
+      <h2>趣味</h2>
+      <ul>
+        <li>趣味1</li>
+        <li>趣味2</li>
+        <li>趣味3</li>
+      </ul>
+    </section>
 
-1. 同じディレクトリに `style.css` を作成：
-```css
-body {
-  background: #fefefe;
-  font-family: sans-serif;
-  margin: 2em;
-}
+    <section id="skills">
+      <h2>スキル</h2>
+      <ul>
+        <li>スキル1</li>
+        <li>スキル2</li>
+        <li>スキル3</li>
+      </ul>
+    </section>
 
-nav ul {
-  list-style: none;
-  padding: 0;
-}
+    <section id="contact">
+      <h2>お問い合わせ</h2>
+      <form id="contact-form">
+        <div>
+          <label for="name">お名前：</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+          <label for="email">メールアドレス：</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+          <label for="message">メッセージ：</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit">送信</button>
+      </form>
+    </section>
+  </main>
 
-nav li {
-  margin-bottom: 10px;
-}
+  <footer>
+    <p>&copy; 2024 [あなたの名前]. All rights reserved.</p>
+  </footer>
 
-a {
-  color: #007acc;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-```
-
-2. ブラウザを更新：
-- デザインが適用されていることを確認
-
-### 4. HTMLの基本を学ぼう
-
-HTMLは「HyperText Markup Language」の略で、Webページの構造を定義するための言語です。
-タグと呼ばれる特別な記号を使って、テキストや画像などの要素を配置していきます。
-
-1. `html.html` を作成：
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>HTML 入門</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>HTMLとは？</h1>
-  <p>HTMLはウェブページの構造を定義するためのマークアップ言語です。</p>
-  
-  <h2>基本構造</h2>
-  <pre>
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;...&lt;/head&gt;
-  &lt;body&gt;...&lt;/body&gt;
-&lt;/html&gt;
-  </pre>
-
-  <h2>よく使うタグ</h2>
-  <ul>
-    <li>&lt;h1&gt; - 見出し</li>
-    <li>&lt;p&gt; - 段落</li>
-    <li>&lt;a&gt; - リンク</li>
-    <li>&lt;img&gt; - 画像</li>
-  </ul>
-
-  <h2>練習問題</h2>
-  <p>以下の要素を使って、自己紹介ページを作ってみましょう：</p>
-  <ul>
-    <li>見出し（h1, h2）</li>
-    <li>段落（p）</li>
-    <li>リスト（ul, li）</li>
-    <li>画像（img）</li>
-  </ul>
-
-  <a href="index.html">トップに戻る</a>
+  <script src="script.js"></script>
 </body>
 </html>
 ```
 
 このHTMLファイルの各部分について説明します：
 
-1. `<!DOCTYPE html>` - HTML5を使用することを宣言します
-2. `<html>` - HTML文書の開始を表します
-3. `<head>` - ページの設定情報を記述する部分です
-   - `<meta charset="UTF-8">` - 文字コードをUTF-8に設定（日本語を正しく表示するため）
-   - `<title>` - ブラウザのタブに表示されるタイトル
-   - `<link>` - CSSファイルを読み込む設定
-4. `<body>` - 実際にページに表示される内容を記述する部分です
-   - `<h1>`, `<h2>` - 見出し（h1が最も大きく、h2, h3...と小さくなります）
-   - `<p>` - 段落（テキストのまとまり）
-   - `<ul>`, `<li>` - リスト（ulは順序なしリスト、liはリストの項目）
-   - `<a>` - リンク（href属性でリンク先を指定）
-   - `<pre>` - 整形済みテキスト（改行やスペースをそのまま表示）
+1. `<header>` - サイトのヘッダー部分（タイトルとナビゲーション）
+2. `<nav>` - ナビゲーションメニュー
+3. `<main>` - メインコンテンツ
+4. `<section>` - コンテンツの区切り（About Me、趣味、スキル、お問い合わせ）
+5. `<form>` - お問い合わせフォーム
 
-2. ブラウザで確認：
-- `http://localhost/html.html` にアクセス
-- HTMLの基本が学べるページが表示されます
+### 3. スタイルを追加しよう
 
-### 5. CSSの基本を学ぼう
-
-1. `css.html` を作成：
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>CSS 入門</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>CSSとは？</h1>
-  <p>CSSはウェブページのデザインを定義するためのスタイルシート言語です。</p>
-
-  <h2>基本的な書き方</h2>
-  <pre>
-セレクタ {
-  プロパティ: 値;
+1. 同じディレクトリに `style.css` を作成：
+```css
+/* 全体のスタイル */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  color: #333;
 }
-  </pre>
 
-  <h2>よく使うプロパティ</h2>
-  <ul>
-    <li>color - 文字色</li>
-    <li>background - 背景</li>
-    <li>margin - 外側の余白</li>
-    <li>padding - 内側の余白</li>
-  </ul>
+/* ヘッダーのスタイル */
+header {
+  background: #2c3e50;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
 
-  <h2>練習問題</h2>
-  <p>以下のスタイルを適用してみましょう：</p>
-  <ul>
-    <li>見出しを青色に</li>
-    <li>段落に余白を追加</li>
-    <li>リストのマークを変更</li>
-  </ul>
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
 
-  <a href="index.html">トップに戻る</a>
-</body>
-</html>
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #3498db;
+}
+
+/* メインコンテンツのスタイル */
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+section {
+  margin-bottom: 3rem;
+}
+
+/* プロフィール画像 */
+.profile-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 1rem 0;
+}
+
+/* フォームのスタイル */
+form div {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  background: #3498db;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #2980b9;
+}
+
+/* フッターのスタイル */
+footer {
+  background: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
 ```
 
-### 6. JavaScriptの基本を学ぼう
+### 4. インタラクティブな機能を追加しよう
 
-1. `js.html` を作成：
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>JavaScript 入門</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>JavaScriptとは？</h1>
-  <p>JavaScriptはウェブページに動きを追加するためのプログラミング言語です。</p>
+1. `script.js` を作成：
+```javascript
+// フォーム送信時の処理
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // フォームの値を取得
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const message = document.getElementById('message').value;
+  
+  // 送信確認メッセージ
+  alert(`送信完了！\n\n名前: ${name}\nメール: ${email}\nメッセージ: ${message}`);
+  
+  // フォームをリセット
+  this.reset();
+});
 
-  <h2>基本的な書き方</h2>
-  <pre>
-&lt;script&gt;
-  // ここにJavaScriptのコードを書きます
-&lt;/script&gt;
-  </pre>
-
-  <h2>簡単な例</h2>
-  <button onclick="alert('こんにちは！')">クリックしてください</button>
-
-  <h2>練習問題</h2>
-  <p>以下の機能を実装してみましょう：</p>
-  <ul>
-    <li>ボタンをクリックして文字を表示</li>
-    <li>時間を表示する</li>
-    <li>簡単な計算機を作る</li>
-  </ul>
-
-  <a href="index.html">トップに戻る</a>
-</body>
-</html>
+// スムーズスクロール
+document.querySelectorAll('nav a').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const section = document.querySelector(this.getAttribute('href'));
+    section.scrollIntoView({ behavior: 'smooth' });
+  });
+});
 ```
+
+## カスタマイズのポイント
+
+1. プロフィール情報の更新
+   - 名前、自己紹介文を変更
+   - プロフィール画像を追加（`profile.jpg`として保存）
+   - 趣味やスキルを自分のものに更新
+
+2. デザインのカスタマイズ
+   - `style.css`の色を変更（`#2c3e50`や`#3498db`などの色コード）
+   - フォントを変更
+   - レイアウトを調整
+
+3. 機能の追加
+   - SNSリンクの追加
+   - ポートフォリオ作品の展示
+   - アニメーション効果の追加
 
 ## 確認方法
 
@@ -245,26 +270,21 @@ HTMLは「HyperText Markup Language」の略で、Webページの構造を定義
 ```bash
 ls -l /var/www/html/*.html
 ls -l /var/www/html/style.css
+ls -l /var/www/html/script.js
 ```
 
 2. ブラウザで確認：
-- `http://localhost` - トップページ
-- `http://localhost/html.html` - HTML入門
-- `http://localhost/css.html` - CSS入門
-- `http://localhost/js.html` - JavaScript入門
-
-## 次のステップ
-
-1. 各ページの内容をカスタマイズしてみましょう
-2. 新しいページを追加してみましょう
-3. スタイルを変更してみましょう
-4. インタラクティブな要素を追加してみましょう
+- `http://localhost` にアクセス
+- 自己紹介サイトが表示されることを確認
+- 各セクションへのリンクが機能することを確認
+- フォームが動作することを確認
 
 ## 困ったときは
 
 - ファイルが表示されない → ファイル名とパスを確認
 - スタイルが適用されない → CSSファイルのパスを確認
-- エラーが発生する → ブラウザの開発者ツールで確認
+- 画像が表示されない → 画像ファイルのパスと名前を確認
+- スクリプトが動作しない → ブラウザの開発者ツールでエラーを確認
 
 ## 参考資料
 
