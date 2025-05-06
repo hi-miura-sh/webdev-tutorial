@@ -127,13 +127,9 @@ cd /var/www/html
 </html>
 ```
 
-このHTMLファイルの各部分について説明します：
-
-1. `<header>` - サイトのヘッダー部分（タイトルとナビゲーション）
-2. `<nav>` - ナビゲーションメニュー
-3. `<main>` - メインコンテンツ
-4. `<section>` - コンテンツの区切り（About Me、趣味、スキル、お問い合わせ）
-5. `<form>` - お問い合わせフォーム
+このHTMLファイルをブラウザで開くと、非常にシンプルな見た目になります。
+テキストは左揃えで、余白も適切に設定されておらず、見た目が整っていません。
+これをCSSで整えていきましょう。
 
 ### 3. スタイルを追加しよう
 
@@ -428,6 +424,8 @@ ls -l /var/www/html/script.js
 Node.jsは、JavaScriptをサーバーサイドで実行できるようにする環境です。
 モダンなWeb開発では、Node.jsを使用して開発環境を整えることが一般的です。
 
+#### 1. Node.jsのインストールと確認
+
 1. Node.jsのインストール：
 ```bash
 # Node.jsのバージョン管理ツール（nvm）をインストール
@@ -440,11 +438,29 @@ source ~/.bashrc
 nvm install --lts
 ```
 
+2. インストールの確認：
+```bash
+# Node.jsのバージョンを確認
+node -v
+
+# npmのバージョンを確認
+npm -v
+```
+
+#### 2. プロジェクトの作成と設定
+
+1. プロジェクトディレクトリの作成：
+```bash
+# プロジェクトディレクトリを作成
+mkdir my-profile-site
+cd my-profile-site
+
+# 既存のファイルをコピー
+cp /var/www/html/*.{html,css,js} .
+```
+
 2. プロジェクトの初期化：
 ```bash
-# プロジェクトディレクトリに移動
-cd /var/www/html
-
 # package.jsonの作成
 npm init -y
 
@@ -452,19 +468,124 @@ npm init -y
 npm install --save-dev live-server
 ```
 
-3. 開発用サーバーの起動：
+3. `package.json`の編集：
 ```bash
-# package.jsonのscriptsセクションに以下を追加
-# "start": "live-server --port=8080"
+# package.jsonを開く
+nano package.json
+```
 
-# 開発サーバーを起動
+以下のように`scripts`セクションを編集：
+```json
+{
+  "name": "my-profile-site",
+  "version": "1.0.0",
+  "description": "My personal profile site",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=8080",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
+```
+
+#### 3. 開発サーバーの起動と確認
+
+1. 開発サーバーの起動：
+```bash
 npm start
+```
+
+2. ブラウザで確認：
+- `http://localhost:8080` にアクセス
+- サイトが表示されることを確認
+- ファイルを編集して保存すると、自動的にブラウザが更新されることを確認
+
+#### 4. 便利な機能の追加
+
+1. 画像の最適化ツールのインストール：
+```bash
+npm install --save-dev sharp
+```
+
+2. 画像最適化スクリプトの作成：
+```bash
+# scriptsディレクトリを作成
+mkdir scripts
+
+# 画像最適化スクリプトを作成
+nano scripts/optimize-images.js
+```
+
+以下の内容を追加：
+```javascript
+const sharp = require('sharp');
+const fs = require('fs');
+const path = require('path');
+
+// 画像を最適化する関数
+async function optimizeImage(inputPath, outputPath) {
+  try {
+    await sharp(inputPath)
+      .resize(800) // 最大幅を800pxに
+      .jpeg({ quality: 80 }) // JPEG品質を80%に
+      .toFile(outputPath);
+    console.log(`最適化完了: ${outputPath}`);
+  } catch (error) {
+    console.error(`エラー: ${error.message}`);
+  }
+}
+
+// プロフィール画像を最適化
+optimizeImage('profile.jpg', 'profile-optimized.jpg');
+```
+
+3. スクリプトの実行：
+```bash
+node scripts/optimize-images.js
+```
+
+#### 5. 開発の効率化
+
+1. ファイル監視の自動化：
+```bash
+npm install --save-dev nodemon
+```
+
+2. `package.json`の`scripts`セクションに追加：
+```json
+{
+  "scripts": {
+    "start": "live-server --port=8080",
+    "optimize": "node scripts/optimize-images.js",
+    "watch": "nodemon scripts/optimize-images.js"
+  }
+}
+```
+
+3. 使用例：
+```bash
+# 開発サーバーの起動
+npm start
+
+# 画像の最適化
+npm run optimize
+
+# 画像の自動最適化（ファイル変更を監視）
+npm run watch
 ```
 
 これにより、以下の機能が使えるようになります：
 - ファイルの変更を自動検知してブラウザを更新
 - ローカル開発サーバー（http://localhost:8080）
 - モジュールの管理（npm）
+- 画像の自動最適化
+- 開発効率の向上
 
 ## 参考資料
 
