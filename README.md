@@ -457,6 +457,9 @@ Bootstrapは、Webサイトのデザインを簡単に整えることができ�
 CDN（Content Delivery Network）とは、インターネット上でファイルを配信する仕組みです。
 Bootstrapのファイルを自分のサーバーに置かなくても、インターネットから読み込むことができます。
 
+注意：CDNを使用するにはインターネット接続が必要です。
+インターネットに接続できない環境では、以下の「オフライン環境での使用方法」を参照してください。
+
 1. `index.html`の`<head>`タグ内に以下のコードを追加：
 ```html
 <!-- Bootstrap CSS -->
@@ -470,6 +473,46 @@ Bootstrapのファイルを自分のサーバーに置かなくても、イン�
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 ```
 このコードは、Bootstrapの動的な機能（ドロップダウンメニューなど）を動かすためのものです。
+
+#### オフライン環境での使用方法
+インターネットに接続できない環境でもBootstrapを使用するには、ファイルをダウンロードしてローカルに保存する必要があります。
+
+1. Bootstrapのファイルをダウンロード：
+   - [Bootstrap公式サイト](https://getbootstrap.com/docs/5.3/getting-started/download/)にアクセス
+   - 「Download」セクションから「Compiled CSS and JS」をダウンロード
+   - ダウンロードしたZIPファイルを解凍
+
+2. ファイルを配置：
+```bash
+# プロジェクトディレクトリにcssとjsフォルダを作成
+mkdir css js
+
+# ダウンロードしたファイルを配置
+# css/bootstrap.min.css を css/ フォルダに
+# js/bootstrap.bundle.min.js を js/ フォルダに
+```
+
+3. HTMLファイルの修正：
+```html
+<!-- CDNの代わりにローカルのファイルを参照 -->
+<head>
+  <!-- Bootstrap CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- コンテンツ -->
+  
+  <!-- Bootstrap JavaScript -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+```
+
+注意点：
+- オフライン環境では、Google Fontsなどの外部リソースも使用できません
+- フォントはシステムにインストールされているものを使用するか、Webフォントファイルをローカルに保存する必要があります
+- 画像やその他の外部リソースも同様に、ローカルに保存する必要があります
+
+[目次に戻る](#目次)
 
 ### 2. 基本的な使い方
 
