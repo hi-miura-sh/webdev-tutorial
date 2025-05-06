@@ -22,7 +22,25 @@ sudo apt install apache2
 sudo service apache2 start
 ```
 
-3. インストールと起動が成功したか確認するには、ブラウザで `http://localhost` にアクセスしてみましょう。
+3. プライベートIPアドレスを確認します：
+```bash
+ip addr show
+```
+このコマンドを実行すると、以下のような情報が表示されます：
+```
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:15:5d:01:ca:05 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.100/24 brd 192.168.1.255 scope global dynamic eth0
+       valid_lft 86397sec preferred_lft 86397sec
+    inet6 fe80::215:5dff:fe01:ca05/64 scope link
+       valid_lft forever preferred_lft 86397sec
+```
+この例では、`192.168.1.100`がプライベートIPアドレスです。
+
+4. インストールと起動が成功したか確認するには、ブラウザで以下のURLにアクセスしてみましょう：
+- 同じPCから：`http://localhost` または `http://127.0.0.1`
+- 同じネットワーク内の他のデバイスから：`http://192.168.1.100`（あなたのプライベートIPアドレス）
+
 「Apache2 Ubuntu Default Page」というページが表示されれば成功です。
 
 ### 2. 自己紹介サイトの基本構造を作ろう
@@ -119,103 +137,122 @@ cd /var/www/html
 
 ### 3. スタイルを追加しよう
 
+CSS（Cascading Style Sheets）は、Webページのデザインを定義するための言語です。
+HTMLで作った要素の見た目（色、大きさ、配置など）を指定できます。
+
 1. 同じディレクトリに `style.css` を作成：
 ```css
 /* 全体のスタイル */
 body {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
-  color: #333;
+  font-family: 'Helvetica Neue', Arial, sans-serif;  /* フォントの種類 */
+  line-height: 1.6;                                  /* 行の高さ */
+  margin: 0;                                         /* 外側の余白を0に */
+  padding: 0;                                        /* 内側の余白を0に */
+  color: #333;                                       /* 文字色を濃いグレーに */
 }
 
 /* ヘッダーのスタイル */
 header {
-  background: #2c3e50;
-  color: white;
-  padding: 1rem;
-  text-align: center;
+  background: #2c3e50;                               /* 背景色を濃い青に */
+  color: white;                                      /* 文字色を白に */
+  padding: 1rem;                                     /* 内側の余白を設定 */
+  text-align: center;                                /* テキストを中央揃えに */
 }
 
 nav ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
+  list-style: none;                                  /* リストのマークを消す */
+  padding: 0;                                        /* 内側の余白を0に */
+  display: flex;                                     /* フレックスボックスを使用 */
+  justify-content: center;                           /* 要素を中央に配置 */
+  gap: 2rem;                                         /* 要素間の間隔を設定 */
 }
 
 nav a {
-  color: white;
-  text-decoration: none;
+  color: white;                                      /* リンクの色を白に */
+  text-decoration: none;                             /* 下線を消す */
 }
 
 nav a:hover {
-  color: #3498db;
+  color: #3498db;                                    /* マウスを乗せた時の色を青に */
 }
 
 /* メインコンテンツのスタイル */
 main {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 800px;                                  /* 最大幅を設定 */
+  margin: 0 auto;                                    /* 左右の余白を自動で調整（中央揃え） */
+  padding: 2rem;                                     /* 内側の余白を設定 */
 }
 
 section {
-  margin-bottom: 3rem;
+  margin-bottom: 3rem;                               /* 下の余白を設定 */
 }
 
 /* プロフィール画像 */
 .profile-image {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin: 1rem 0;
+  width: 200px;                                      /* 幅を設定 */
+  height: 200px;                                     /* 高さを設定 */
+  border-radius: 50%;                                /* 円形に */
+  object-fit: cover;                                 /* 画像のアスペクト比を保持 */
+  margin: 1rem 0;                                    /* 上下の余白を設定 */
 }
 
 /* フォームのスタイル */
 form div {
-  margin-bottom: 1rem;
+  margin-bottom: 1rem;                               /* 下の余白を設定 */
 }
 
 label {
-  display: block;
-  margin-bottom: 0.5rem;
+  display: block;                                    /* ブロック要素として表示 */
+  margin-bottom: 0.5rem;                             /* 下の余白を設定 */
 }
 
 input, textarea {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  width: 100%;                                       /* 幅を100%に */
+  padding: 0.5rem;                                   /* 内側の余白を設定 */
+  border: 1px solid #ddd;                            /* 枠線を設定 */
+  border-radius: 4px;                                /* 角を丸く */
 }
 
 button {
-  background: #3498db;
-  color: white;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  background: #3498db;                               /* 背景色を青に */
+  color: white;                                      /* 文字色を白に */
+  padding: 0.5rem 1rem;                              /* 内側の余白を設定 */
+  border: none;                                      /* 枠線を消す */
+  border-radius: 4px;                                /* 角を丸く */
+  cursor: pointer;                                   /* マウスカーソルをポインターに */
 }
 
 button:hover {
-  background: #2980b9;
+  background: #2980b9;                               /* マウスを乗せた時の背景色を濃い青に */
 }
 
 /* フッターのスタイル */
 footer {
-  background: #2c3e50;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+  background: #2c3e50;                               /* 背景色を濃い青に */
+  color: white;                                      /* 文字色を白に */
+  text-align: center;                                /* テキストを中央揃えに */
+  padding: 1rem;                                     /* 内側の余白を設定 */
+  position: fixed;                                   /* 固定位置に */
+  bottom: 0;                                         /* 下端に配置 */
+  width: 100%;                                       /* 幅を100%に */
 }
 ```
+
+CSSの基本的な書き方：
+1. セレクタ - スタイルを適用する要素を指定（例：`body`, `header`, `.profile-image`）
+2. プロパティ - 変更したい見た目の要素（例：`color`, `margin`, `padding`）
+3. 値 - プロパティの具体的な設定値（例：`white`, `1rem`, `#3498db`）
+
+よく使うプロパティ：
+- `color` - 文字色
+- `background` - 背景色
+- `margin` - 外側の余白
+- `padding` - 内側の余白
+- `width`/`height` - 幅/高さ
+- `border` - 枠線
+- `border-radius` - 角の丸み
+- `text-align` - テキストの配置
+- `display` - 要素の表示方法
 
 ### 4. インタラクティブな機能を追加しよう
 
@@ -341,7 +378,10 @@ ls -l /var/www/html/script.js
 ```
 
 2. ブラウザで確認：
-- `http://localhost` にアクセス
+- 同じPCから：
+  - `http://localhost` または `http://127.0.0.1`
+- 同じネットワーク内の他のデバイスから：
+  - `http://192.168.1.100`（あなたのプライベートIPアドレス）
 - 自己紹介サイトが表示されることを確認
 - 各セクションへのリンクが機能することを確認
 - フォームが動作することを確認
@@ -352,9 +392,84 @@ ls -l /var/www/html/script.js
 - スタイルが適用されない → CSSファイルのパスを確認
 - 画像が表示されない → 画像ファイルのパスと名前を確認
 - スクリプトが動作しない → ブラウザの開発者ツールでエラーを確認
+- 他のデバイスからアクセスできない場合：
+  - ファイアウォールの設定を確認
+  - Apache2の設定で外部からのアクセスを許可
+  ```bash
+  sudo ufw allow 80/tcp
+  ```
+  - Apache2の設定ファイルを編集
+  ```bash
+  sudo nano /etc/apache2/apache2.conf
+  ```
+  以下の行を探して、必要に応じて修正：
+  ```
+  <Directory /var/www/html>
+      Options Indexes FollowSymLinks
+      AllowOverride All
+      Require all granted
+  </Directory>
+  ```
+  変更後、Apache2を再起動：
+  ```bash
+  sudo service apache2 restart
+  ```
 
 ## 参考資料
 
 - [MDN Web Docs](https://developer.mozilla.org/ja/)
 - [W3Schools](https://www.w3schools.com/)
-- [HTML Living Standard](https://html.spec.whatwg.org/) 
+- [HTML Living Standard](https://html.spec.whatwg.org/)
+- [Node.js公式サイト](https://nodejs.org/)
+- [npm公式サイト](https://www.npmjs.com/)
+
+### 7. Node.jsで開発環境を整えよう（オプション）
+
+Node.jsは、JavaScriptをサーバーサイドで実行できるようにする環境です。
+モダンなWeb開発では、Node.jsを使用して開発環境を整えることが一般的です。
+
+1. Node.jsのインストール：
+```bash
+# Node.jsのバージョン管理ツール（nvm）をインストール
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# シェルを再起動するか、以下のコマンドを実行
+source ~/.bashrc
+
+# 最新のLTS版Node.jsをインストール
+nvm install --lts
+```
+
+2. プロジェクトの初期化：
+```bash
+# プロジェクトディレクトリに移動
+cd /var/www/html
+
+# package.jsonの作成
+npm init -y
+
+# 開発用サーバーのインストール
+npm install --save-dev live-server
+```
+
+3. 開発用サーバーの起動：
+```bash
+# package.jsonのscriptsセクションに以下を追加
+# "start": "live-server --port=8080"
+
+# 開発サーバーを起動
+npm start
+```
+
+これにより、以下の機能が使えるようになります：
+- ファイルの変更を自動検知してブラウザを更新
+- ローカル開発サーバー（http://localhost:8080）
+- モジュールの管理（npm）
+
+## 参考資料
+
+- [MDN Web Docs](https://developer.mozilla.org/ja/)
+- [W3Schools](https://www.w3schools.com/)
+- [HTML Living Standard](https://html.spec.whatwg.org/)
+- [Node.js公式サイト](https://nodejs.org/)
+- [npm公式サイト](https://www.npmjs.com/) 
