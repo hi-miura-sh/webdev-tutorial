@@ -110,145 +110,153 @@ IPアドレスの見分け方：
 
 ### 2. 自己紹介サイトの基本構造を作ろう
 
-1. `/var/www/html` ディレクトリに移動します：
-```bash
-cd /var/www/html
-```
+1. **`/var/www/html` ディレクトリに移動します：**
+   ```bash
+   cd /var/www/html
+   ```
 
-2. 以下の内容を `index.html` として保存します：
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>私の自己紹介</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <h1>私の自己紹介</h1>
-    <nav>
-      <ul>
-        <li><a href="#about">About Me</a></li>
-        <li><a href="#hobby">趣味</a></li>
-        <li><a href="#skills">スキル</a></li>
-        <li><a href="#contact">お問い合わせ</a></li>
-      </ul>
-    </nav>
-  </header>
+2. **以下の内容を `index.html` として保存します：**
+   ```html
+   <!DOCTYPE html>
+   <html>
+   <head>
+     <meta charset="UTF-8">
+     <title>私の自己紹介</title>
+     <link rel="stylesheet" href="style.css">
+   </head>
+   <body>
+     <header>
+       <h1>私の自己紹介</h1>
+       <nav>
+         <ul>
+           <li><a href="#about">About Me</a></li>
+           <li><a href="#hobby">趣味</a></li>
+           <li><a href="#skills">スキル</a></li>
+           <li><a href="#contact">お問い合わせ</a></li>
+         </ul>
+       </nav>
+     </header>
+   
+     <main>
+       <section id="about">
+         <h2>About Me</h2>
+         <img src="profile.jpg" alt="プロフィール画像" class="profile-image">
+         <p>はじめまして！私は[あなたの名前]です。</p>
+         <p>[簡単な自己紹介文をここに書きます]</p>
+       </section>
+   
+       <section id="hobby">
+         <h2>趣味</h2>
+         <ul>
+           <li>趣味1</li>
+           <li>趣味2</li>
+           <li>趣味3</li>
+         </ul>
+       </section>
+   
+       <section id="skills">
+         <h2>スキル</h2>
+         <ul>
+           <li>スキル1</li>
+           <li>スキル2</li>
+           <li>スキル3</li>
+         </ul>
+       </section>
+   
+       <section id="contact">
+         <h2>お問い合わせ</h2>
+         <form id="contact-form">
+           <div>
+             <label for="name">お名前：</label>
+             <input type="text" id="name" name="name" required>
+           </div>
+           <div>
+             <label for="email">メールアドレス：</label>
+             <input type="email" id="email" name="email" required>
+           </div>
+           <div>
+             <label for="message">メッセージ：</label>
+             <textarea id="message" name="message" required></textarea>
+           </div>
+           <button type="submit">送信</button>
+         </form>
+       </section>
+     </main>
+   
+     <footer>
+       <p>&copy; 2024 [あなたの名前]. All rights reserved.</p>
+     </footer>
+   
+     <script src="script.js"></script>
+   </body>
+   </html>
+   ```
 
-  <main>
-    <section id="about">
-      <h2>About Me</h2>
-      <img src="profile.jpg" alt="プロフィール画像" class="profile-image">
-      <p>はじめまして！私は[あなたの名前]です。</p>
-      <p>[簡単な自己紹介文をここに書きます]</p>
-    </section>
+   - （ファイルが保存できない等の）パーミッションの問題が発生した場合<br>
+   以下の手順で対処します。
+   ```bash
+   # ディレクトリのパーミッションを確認
+   ls -l /var/www/html
+   
+   # 必要に応じてディレクトリのパーミッションを変更
+   sudo chmod 755 /var/www/html
+   
+   # ファイルのパーミッションを確認
+   ls -l /var/www/html/index.html
+   
+   # 必要に応じてファイルのパーミッションを変更
+   sudo chmod 644 /var/www/html/index.html
+   
+   # Apacheユーザー（www-data）に所有権を変更
+   sudo chown www-data:www-data /var/www/html/index.html
+   ```
 
-    <section id="hobby">
-      <h2>趣味</h2>
-      <ul>
-        <li>趣味1</li>
-        <li>趣味2</li>
-        <li>趣味3</li>
-      </ul>
-    </section>
+   注意：
+   - 755はディレクトリに対して、所有者は読み書き実行可能、グループとその他は読み実行可能
+   - 644はファイルに対して、所有者は読み書き可能、グループとその他は読み取りのみ可能
+   - セキュリティのため、必要最小限のパーミッションを設定することが重要です
 
-    <section id="skills">
-      <h2>スキル</h2>
-      <ul>
-        <li>スキル1</li>
-        <li>スキル2</li>
-        <li>スキル3</li>
-      </ul>
-    </section>
+   パーミッションの表記方法について：
+   1. 数値による表記（例：755）
+      - 3桁の数字で表記
+      - 各桁は0-7の数字
+      - 左から順に「所有者」「グループ」「その他のユーザー」の権限を表す
+      - 各桁の意味：
+        - 4: 読み取り（r）
+        - 2: 書き込み（w）
+        - 1: 実行（x）
+      - 例：755 = 4+2+1 | 4+0+1 | 4+0+1 = rwx | r-x | r-x
+   
+   2. 記号による表記（例：+x）
+      - ユーザーカテゴリー：
+        - u: 所有者（user）
+        - g: グループ（group）
+        - o: その他のユーザー（others）
+        - a: すべてのユーザー（all）
+      - 操作：
+        - +: 権限を追加
+        - -: 権限を削除
+        - =: 権限を設定
+      - 権限：
+        - r: 読み取り（read）
+        - w: 書き込み（write）
+        - x: 実行（execute）
+      - 例：
+        - `chmod u+x file`: 所有者に実行権限を追加
+        - `chmod g-w file`: グループから書き込み権限を削除
+        - `chmod a=r file`: すべてのユーザーに読み取り権限のみを設定
 
-    <section id="contact">
-      <h2>お問い合わせ</h2>
-      <form id="contact-form">
-        <div>
-          <label for="name">お名前：</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-        <div>
-          <label for="email">メールアドレス：</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div>
-          <label for="message">メッセージ：</label>
-          <textarea id="message" name="message" required></textarea>
-        </div>
-        <button type="submit">送信</button>
-      </form>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2024 [あなたの名前]. All rights reserved.</p>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
-```
-このHTMLファイルをブラウザで開くと、非常にシンプルな見た目になります。
-テキストは左揃えで、余白も適切に設定されておらず、見た目が整っていません。
-これをCSSで整えていきましょう。
-
-- （ファイルが保存できない等の）パーミッションの問題が発生した場合<br>
-以下の手順で対処します。
-```bash
-# ディレクトリのパーミッションを確認
-ls -l /var/www/html
-
-# 必要に応じてディレクトリのパーミッションを変更
-sudo chmod 755 /var/www/html
-
-# ファイルのパーミッションを確認
-ls -l /var/www/html/index.html
-
-# 必要に応じてファイルのパーミッションを変更
-sudo chmod 644 /var/www/html/index.html
-
-# Apacheユーザー（www-data）に所有権を変更
-sudo chown www-data:www-data /var/www/html/index.html
-```
-
-注意：
-- 755はディレクトリに対して、所有者は読み書き実行可能、グループとその他は読み実行可能
-- 644はファイルに対して、所有者は読み書き可能、グループとその他は読み取りのみ可能
-- セキュリティのため、必要最小限のパーミッションを設定することが重要です
-
-パーミッションの表記方法について：
-1. 数値による表記（例：755）
-   - 3桁の数字で表記
-   - 各桁は0-7の数字
-   - 左から順に「所有者」「グループ」「その他のユーザー」の権限を表す
-   - 各桁の意味：
-     - 4: 読み取り（r）
-     - 2: 書き込み（w）
-     - 1: 実行（x）
-   - 例：755 = 4+2+1 | 4+0+1 | 4+0+1 = rwx | r-x | r-x
-
-2. 記号による表記（例：+x）
-   - ユーザーカテゴリー：
-     - u: 所有者（user）
-     - g: グループ（group）
-     - o: その他のユーザー（others）
-     - a: すべてのユーザー（all）
-   - 操作：
-     - +: 権限を追加
-     - -: 権限を削除
-     - =: 権限を設定
-   - 権限：
-     - r: 読み取り（read）
-     - w: 書き込み（write）
-     - x: 実行（execute）
-   - 例：
-     - `chmod u+x file`: 所有者に実行権限を追加
-     - `chmod g-w file`: グループから書き込み権限を削除
-     - `chmod a=r file`: すべてのユーザーに読み取り権限のみを設定
-
+3. **ブラウザで以下のURLにアクセスしてみましょう：**
+   - 同じPCから：`http://localhost` または `http://127.0.0.1`
+   - 同じネットワーク内の他のデバイスから：
+     - 有線LAN接続の場合：`http://192.168.1.100`（あなたの有線LANのIPアドレス）
+     - 無線LAN接続の場合：`http://192.168.1.101`（あなたの無線LANのIPアドレス）
+    
+   このHTMLファイルをブラウザで開くと、非常にシンプルな見た目になります。
+   テキストは左揃えで、余白も適切に設定されておらず、見た目が整っていません。
+   これをCSSで整えていきましょう。
+   
+   
 
 [目次に戻る](#目次)
 
@@ -257,119 +265,119 @@ sudo chown www-data:www-data /var/www/html/index.html
 CSS（Cascading Style Sheets）は、Webページのデザインを定義するための言語です。
 HTMLで作った要素の見た目（色、大きさ、配置など）を指定できます。
 
-1. 同じディレクトリに `style.css` を作成：
-```css
-/* 全体のスタイル */
-body {
-  font-family: 'Helvetica Neue', Arial, sans-serif;  /* フォントの種類 */
-  line-height: 1.6;                                  /* 行の高さ */
-  margin: 0;                                         /* 外側の余白を0に */
-  padding: 0;                                        /* 内側の余白を0に */
-  color: #333;                                       /* 文字色を濃いグレーに */
-}
+1. **同じディレクトリに `style.css` を作成：**
+   ```css
+   /* 全体のスタイル */
+   body {
+     font-family: 'Helvetica Neue', Arial, sans-serif;  /* フォントの種類 */
+     line-height: 1.6;                                  /* 行の高さ */
+     margin: 0;                                         /* 外側の余白を0に */
+     padding: 0;                                        /* 内側の余白を0に */
+     color: #333;                                       /* 文字色を濃いグレーに */
+   }
+   
+   /* ヘッダーのスタイル */
+   header {
+     background: #2c3e50;                               /* 背景色を濃い青に */
+     color: white;                                      /* 文字色を白に */
+     padding: 1rem;                                     /* 内側の余白を設定 */
+     text-align: center;                                /* テキストを中央揃えに */
+   }
+   
+   nav ul {
+     list-style: none;                                  /* リストのマークを消す */
+     padding: 0;                                        /* 内側の余白を0に */
+     display: flex;                                     /* フレックスボックスを使用 */
+     justify-content: center;                           /* 要素を中央に配置 */
+     gap: 2rem;                                         /* 要素間の間隔を設定 */
+   }
+   
+   nav a {
+     color: white;                                      /* リンクの色を白に */
+     text-decoration: none;                             /* 下線を消す */
+   }
+   
+   nav a:hover {
+     color: #3498db;                                    /* マウスを乗せた時の色を青に */
+   }
+   
+   /* メインコンテンツのスタイル */
+   main {
+     max-width: 800px;                                  /* 最大幅を設定 */
+     margin: 0 auto;                                    /* 左右の余白を自動で調整（中央揃え） */
+     padding: 2rem;                                     /* 内側の余白を設定 */
+   }
+   
+   section {
+     margin-bottom: 3rem;                               /* 下の余白を設定 */
+   }
+   
+   /* プロフィール画像 */
+   .profile-image {
+     width: 200px;                                      /* 幅を設定 */
+     height: 200px;                                     /* 高さを設定 */
+     border-radius: 50%;                                /* 円形に */
+     object-fit: cover;                                 /* 画像のアスペクト比を保持 */
+     margin: 1rem 0;                                    /* 上下の余白を設定 */
+   }
+   
+   /* フォームのスタイル */
+   form div {
+     margin-bottom: 1rem;                               /* 下の余白を設定 */
+   }
+   
+   label {
+     display: block;                                    /* ブロック要素として表示 */
+     margin-bottom: 0.5rem;                             /* 下の余白を設定 */
+   }
+   
+   input, textarea {
+     width: 100%;                                       /* 幅を100%に */
+     padding: 0.5rem;                                   /* 内側の余白を設定 */
+     border: 1px solid #ddd;                            /* 枠線を設定 */
+     border-radius: 4px;                                /* 角を丸く */
+   }
+   
+   button {
+     background: #3498db;                               /* 背景色を青に */
+     color: white;                                      /* 文字色を白に */
+     padding: 0.5rem 1rem;                              /* 内側の余白を設定 */
+     border: none;                                      /* 枠線を消す */
+     border-radius: 4px;                                /* 角を丸く */
+     cursor: pointer;                                   /* マウスカーソルをポインターに */
+   }
+   
+   button:hover {
+     background: #2980b9;                               /* マウスを乗せた時の背景色を濃い青に */
+   }
+   
+   /* フッターのスタイル */
+   footer {
+     background: #2c3e50;                               /* 背景色を濃い青に */
+     color: white;                                      /* 文字色を白に */
+     text-align: center;                                /* テキストを中央揃えに */
+     padding: 1rem;                                     /* 内側の余白を設定 */
+     position: fixed;                                   /* 固定位置に */
+     bottom: 0;                                         /* 下端に配置 */
+     width: 100%;                                       /* 幅を100%に */
+   }
+   ```
 
-/* ヘッダーのスタイル */
-header {
-  background: #2c3e50;                               /* 背景色を濃い青に */
-  color: white;                                      /* 文字色を白に */
-  padding: 1rem;                                     /* 内側の余白を設定 */
-  text-align: center;                                /* テキストを中央揃えに */
-}
-
-nav ul {
-  list-style: none;                                  /* リストのマークを消す */
-  padding: 0;                                        /* 内側の余白を0に */
-  display: flex;                                     /* フレックスボックスを使用 */
-  justify-content: center;                           /* 要素を中央に配置 */
-  gap: 2rem;                                         /* 要素間の間隔を設定 */
-}
-
-nav a {
-  color: white;                                      /* リンクの色を白に */
-  text-decoration: none;                             /* 下線を消す */
-}
-
-nav a:hover {
-  color: #3498db;                                    /* マウスを乗せた時の色を青に */
-}
-
-/* メインコンテンツのスタイル */
-main {
-  max-width: 800px;                                  /* 最大幅を設定 */
-  margin: 0 auto;                                    /* 左右の余白を自動で調整（中央揃え） */
-  padding: 2rem;                                     /* 内側の余白を設定 */
-}
-
-section {
-  margin-bottom: 3rem;                               /* 下の余白を設定 */
-}
-
-/* プロフィール画像 */
-.profile-image {
-  width: 200px;                                      /* 幅を設定 */
-  height: 200px;                                     /* 高さを設定 */
-  border-radius: 50%;                                /* 円形に */
-  object-fit: cover;                                 /* 画像のアスペクト比を保持 */
-  margin: 1rem 0;                                    /* 上下の余白を設定 */
-}
-
-/* フォームのスタイル */
-form div {
-  margin-bottom: 1rem;                               /* 下の余白を設定 */
-}
-
-label {
-  display: block;                                    /* ブロック要素として表示 */
-  margin-bottom: 0.5rem;                             /* 下の余白を設定 */
-}
-
-input, textarea {
-  width: 100%;                                       /* 幅を100%に */
-  padding: 0.5rem;                                   /* 内側の余白を設定 */
-  border: 1px solid #ddd;                            /* 枠線を設定 */
-  border-radius: 4px;                                /* 角を丸く */
-}
-
-button {
-  background: #3498db;                               /* 背景色を青に */
-  color: white;                                      /* 文字色を白に */
-  padding: 0.5rem 1rem;                              /* 内側の余白を設定 */
-  border: none;                                      /* 枠線を消す */
-  border-radius: 4px;                                /* 角を丸く */
-  cursor: pointer;                                   /* マウスカーソルをポインターに */
-}
-
-button:hover {
-  background: #2980b9;                               /* マウスを乗せた時の背景色を濃い青に */
-}
-
-/* フッターのスタイル */
-footer {
-  background: #2c3e50;                               /* 背景色を濃い青に */
-  color: white;                                      /* 文字色を白に */
-  text-align: center;                                /* テキストを中央揃えに */
-  padding: 1rem;                                     /* 内側の余白を設定 */
-  position: fixed;                                   /* 固定位置に */
-  bottom: 0;                                         /* 下端に配置 */
-  width: 100%;                                       /* 幅を100%に */
-}
-```
-
-CSSの基本的な書き方：
-1. セレクタ - スタイルを適用する要素を指定（例：`body`, `header`, `.profile-image`）
-2. プロパティ - 変更したい見た目の要素（例：`color`, `margin`, `padding`）
-3. 値 - プロパティの具体的な設定値（例：`white`, `1rem`, `#3498db`）
-
-よく使うプロパティ：
-- `color` - 文字色
-- `background` - 背景色
-- `margin` - 外側の余白
-- `padding` - 内側の余白
-- `width`/`height` - 幅/高さ
-- `border` - 枠線
-- `border-radius` - 角の丸み
-- `text-align` - テキストの配置
-- `display` - 要素の表示方法
+   CSSの基本的な書き方：
+   1. セレクタ - スタイルを適用する要素を指定（例：`body`, `header`, `.profile-image`）
+   2. プロパティ - 変更したい見た目の要素（例：`color`, `margin`, `padding`）
+   3. 値 - プロパティの具体的な設定値（例：`white`, `1rem`, `#3498db`）
+   
+   よく使うプロパティ：
+   - `color` - 文字色
+   - `background` - 背景色
+   - `margin` - 外側の余白
+   - `padding` - 内側の余白
+   - `width`/`height` - 幅/高さ
+   - `border` - 枠線
+   - `border-radius` - 角の丸み
+   - `text-align` - テキストの配置
+   - `display` - 要素の表示方法
 
 [目次に戻る](#目次)
 
