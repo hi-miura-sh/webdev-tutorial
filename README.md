@@ -34,44 +34,44 @@
 
 まず、Apache2をインストールします。Apache2はWebサーバーソフトウェアで、Webページを表示するために必要です：
 
-1. <u>**ターミナルを開いて、以下のコマンドを実行します：**</u>
-```bash
-sudo apt update
-sudo apt install apache2
-```
+1. **ターミナルを開いて、以下のコマンドを実行します：**
+   ```bash
+   sudo apt update
+   sudo apt install apache2
+   ```
 
-2. インストールが完了したら、Apache2を起動します：
-```bash
-sudo service apache2 start
-```
+2. **インストールが完了したら、Apache2を起動します：**
+   ```bash
+   sudo service apache2 start
+   ```
 
-3. プライベートIPアドレスを確認します：
-```bash
-ip addr show
-```
-
-このコマンドを実行すると、以下のような情報が表示されます：
-
-有線LAN接続の場合：
-```
-2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
-    link/ether 00:15:5d:01:ca:05 brd ff:ff:ff:ff:ff:ff
-    inet 192.168.1.100/24 brd 192.168.1.255 scope global dynamic eth0
-       valid_lft 86397sec preferred_lft 86397sec
-    inet6 fe80::215:5dff:fe01:ca05/64 scope link
-       valid_lft forever preferred_lft 86397sec
-```
-
-無線LAN（Wi-Fi）接続の場合：
-```
-3: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
-    link/ether 00:15:5d:01:ca:06 brd ff:ff:ff:ff:ff:ff
-    inet 192.168.1.101/24 brd 192.168.1.255 scope global dynamic wlan0
-       valid_lft 86397sec preferred_lft 86397sec
-    inet6 fe80::215:5dff:fe01:ca06/64 scope link
-       valid_lft forever preferred_lft 86397sec
-```
-4. インストールと起動が成功したか確認するには、ブラウザで以下のURLにアクセスしてみましょう：
+3. **プライベートIPアドレスを確認します：**
+   ```bash
+   ip addr show
+   ```
+   
+   このコマンドを実行すると、以下のような情報が表示されます：
+   
+   有線LAN接続の場合：
+   ```
+   2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+       link/ether 00:15:5d:01:ca:05 brd ff:ff:ff:ff:ff:ff
+       inet 192.168.1.100/24 brd 192.168.1.255 scope global dynamic eth0
+          valid_lft 86397sec preferred_lft 86397sec
+       inet6 fe80::215:5dff:fe01:ca05/64 scope link
+          valid_lft forever preferred_lft 86397sec
+   ```
+   
+   無線LAN（Wi-Fi）接続の場合：
+   ```
+   3: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+       link/ether 00:15:5d:01:ca:06 brd ff:ff:ff:ff:ff:ff
+       inet 192.168.1.101/24 brd 192.168.1.255 scope global dynamic wlan0
+          valid_lft 86397sec preferred_lft 86397sec
+       inet6 fe80::215:5dff:fe01:ca06/64 scope link
+          valid_lft forever preferred_lft 86397sec
+   ```
+4. **インストールと起動が成功したか確認するには、ブラウザで以下のURLにアクセスしてみましょう：**
 - 同じPCから：`http://localhost` または `http://127.0.0.1`
 - 同じネットワーク内の他のデバイスから：
   - 有線LAN接続の場合：`http://192.168.1.100`（あなたの有線LANのIPアドレス）
