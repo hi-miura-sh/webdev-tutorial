@@ -34,7 +34,7 @@
 
 まず、Apache2をインストールします。Apache2はWebサーバーソフトウェアで、Webページを表示するために必要です：
 
-1. ターミナルを開いて、以下のコマンドを実行します：
+1. <u>**ターミナルを開いて、以下のコマンドを実行します：**</u>
 ```bash
 sudo apt update
 sudo apt install apache2
